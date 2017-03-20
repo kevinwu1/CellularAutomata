@@ -43,7 +43,7 @@ function drawRect(context, color, x, y, w, h) {
 }
 
 function GOLtest(n){
-    return n.toString(2).split("").map(parse).reduce(sum);//-((n&(1<<4))>>4);
+    return n.toString(2).split("").map(parse10).reduce(sum);//-((n&(1<<4))>>4);
 }
 
 const GOL = Array(1<<9).fill().map(function(a,b){
@@ -131,7 +131,7 @@ function makeStuff(n){
         function(){
             this.d=[].map.apply(this.d,[].slice.call(arguments))
             return this;
-        },[draw]).repeat(n,
+        },{draw:draw}).repeat(n,
             function(){
                 draw.call(this,context);
                 this.d = this.d.map(grow);
@@ -146,7 +146,7 @@ m = Monad({line:0,d:rand2()},
     function(){
         this.d=[].map.apply(this.d,[].slice.call(arguments))
         return this;
-    },[draw]);
+    },{draw:draw});
 inter = setInterval(function(){
     m=m.draw(context);
     m=m(grow);
